@@ -11,7 +11,7 @@ use anchor_lang::prelude::*;
 
 
 
-declare_id!("ENJbCFKAchd21CP3MCD11oP4HyGs8PVJJ1qW7vymf6jx");
+declare_id!("Dy9hVDU3LvhAurxA7Hi8HeT2uq8cnyivQxFyCp4CWbqT");
 
 #[program]
 pub mod asset_management {

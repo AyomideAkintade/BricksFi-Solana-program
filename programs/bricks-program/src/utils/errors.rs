@@ -11,5 +11,7 @@ pub enum ErrorCode {
     #[msg("Invalid account")]
     InvalidAccount,
     #[msg("Insufficient funds")]
-    InsufficientFunds
+    InsufficientFunds,
+    #[msg("Invalid recipient key")]
+    InvalidRecipient
 }

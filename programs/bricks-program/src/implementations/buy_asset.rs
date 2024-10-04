@@ -1,5 +1,6 @@
 use anchor_lang::prelude::*;
 
+use std::str::FromStr;
 use crate::state::*;
 use crate::utils::ErrorCode;
 
@@ -25,6 +26,12 @@ pub fn buy_asset(ctx: Context<BuyAsset>, asset_key: Pubkey, buying: u64) -> Resu
 
     if payer_lamports < buying {
         return Err(ErrorCode::InsufficientFunds.into());
+    }
+
+    msg!("Recipient Recived {:?}, Recipient Allowed {:?}", {&ctx.accounts.recipient.key()}, &Pubkey::from_str("6epEHHWCeLYYqiprybDARQsXoG8cbmNDNVGHMnLy1z9t").unwrap());
+
+    if &ctx.accounts.recipient.key() != &Pubkey::from_str("6epEHHWCeLYYqiprybDARQsXoG8cbmNDNVGHMnLy1z9t").unwrap() {
+        return Err(ErrorCode::InvalidRecipient.into());        
     }
 
 
