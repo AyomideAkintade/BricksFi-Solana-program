@@ -8,11 +8,13 @@ pub fn convert_sol_to_lamports(amount_in_sol: f64) -> u64 {
     (amount_in_sol * 1_000_000_000.0) as u64
 }
 
-pub fn buy_asset(ctx: Context<BuyAsset>, asset_key: Pubkey, buying: u64) -> Result<()> {
+pub fn buy_asset(ctx: Context<BuyAsset>, asset_key: Pubkey, buying: f64) -> Result<()> {
     
     let asset = &mut ctx.accounts.asset;
 
-    let buying_in_lamports = convert_sol_to_lamports(buying as f64);
+    let buying_in_lamports = convert_sol_to_lamports(buying);
+
+    msg!("Buying_Lamports {:?}", buying_in_lamports);
 
     if asset.value_bought + buying > asset.value {
         return Err(ErrorCode::InsufficientValue.into());
@@ -24,7 +26,7 @@ pub fn buy_asset(ctx: Context<BuyAsset>, asset_key: Pubkey, buying: u64) -> Resu
     msg!("Payer balance before transfer: {}", payer_lamports);
 
 
-    if payer_lamports < buying {
+    if payer_lamports < buying_in_lamports {
         return Err(ErrorCode::InsufficientFunds.into());
     }
 
@@ -53,7 +55,7 @@ pub fn buy_asset(ctx: Context<BuyAsset>, asset_key: Pubkey, buying: u64) -> Resu
     let user = &mut ctx.accounts.user;
 
     if let Some(asset_index) = user.owned_assets.iter().position(|&key| key == asset_key) {
-        let mut current_amount: u64 = user.ownership_amounts[asset_index];
+        let mut current_amount: f64 = user.ownership_amounts[asset_index];
         current_amount += buying;
         user.ownership_amounts[asset_index] = current_amount;
     } else {

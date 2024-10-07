@@ -12,7 +12,7 @@ pub fn initialize_asset(
     images: Vec<[u8; 128]>,
     virtual_link: [u8; 128],
     end_date_timestamp: u64,
-    value: u64,
+    value: f64,
     timeline: Vec<AssetTimeline>,
 ) -> Result<()> {
 
@@ -41,7 +41,7 @@ pub fn initialize_asset(
     asset_state.num_owners = 0;
     asset_state.end_date_timestamp = end_date_timestamp;
     asset_state.value = value;
-    asset_state.value_bought = 0;
+    asset_state.value_bought = 0.0;
     asset_state.timeline = timeline;
 
     let time: u64 = utils::current_timestamp()?;

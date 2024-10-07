@@ -11,7 +11,7 @@ use anchor_lang::prelude::*;
 
 
 
-declare_id!("Dy9hVDU3LvhAurxA7Hi8HeT2uq8cnyivQxFyCp4CWbqT");
+declare_id!("C1Fwq6KuKZpqWp2KeUcceimD1hCE1nvxkjWu4WRSvKZT");
 
 #[program]
 pub mod asset_management {
@@ -31,13 +31,13 @@ pub mod asset_management {
         images: Vec<[u8; 128]>,
         virtual_link: [u8; 128],
         end_date_timestamp: u64,
-        value: u64,
+        value: f64,
         timeline: Vec<AssetTimeline>
     ) -> Result<()> {
         implementations::initialize_asset(ctx, asset_id, name, location, attributes, images,  virtual_link, end_date_timestamp, value, timeline)
     }
 
-    pub fn buy_asset(ctx: Context<BuyAsset>, asset_key: Pubkey, buying: u64) -> Result<()> {
+    pub fn buy_asset(ctx: Context<BuyAsset>, asset_key: Pubkey, buying: f64) -> Result<()> {
         implementations::buy_asset(ctx, asset_key, buying)
     }
 

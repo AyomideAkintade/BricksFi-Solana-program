@@ -11,8 +11,8 @@ pub struct AssetState {
     pub virtual_link: [u8; 128],
     pub num_owners: u16,
     pub end_date_timestamp: u64,
-    pub value: u64,
-    pub value_bought: u64,
+    pub value: f64,
+    pub value_bought: f64,
     pub timeline: Vec<AssetTimeline>,
     pub created_at: u64,
     pub updated_at: u64
@@ -51,7 +51,7 @@ pub struct UserState {
     pub key: Pubkey,
     pub id: [u8; 16],
     pub owned_assets: Vec<Pubkey>, 
-    pub ownership_amounts: Vec<u64>
+    pub ownership_amounts: Vec<f64>
 }
 
 
